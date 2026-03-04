@@ -406,7 +406,10 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 </div>
 
 <script>
-const API_URL = 'https://forexpayment-production.up.railway.app/api/payments/create-intent';
+const IS_LOCAL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+const API_URL = IS_LOCAL
+  ? 'https://corsproxy.io/?https://forexpayment-production.up.railway.app/api/payments/create-intent'
+  : '/api/proxy';
 
 function openP(){
   document.getElementById('pp').classList.add('on');
@@ -494,6 +497,9 @@ async function doCheckout(){
   showLoading();
 
   try {
+    // Base URL for redirects
+    const baseUrl = window.location.origin;
+
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -501,7 +507,9 @@ async function doCheckout(){
         email: email,
         amount: amountCents,
         currency: 'usd',
-        useCheckout: true
+        useCheckout: true,
+        successUrl: baseUrl + '/success.html?status=success&email=' + encodeURIComponent(email),
+        cancelUrl: baseUrl + '/success.html?status=cancel'
       })
     });
 
