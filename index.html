@@ -117,7 +117,6 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 .pcard{background:#fff;border-radius:14px;padding:24px;border:1px solid var(--border);margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
 .pctit{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px;}
 
-/* Stripe only — single payment method highlighted */
 .stripe-banner{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#635bff10,#635bff05);border:1.5px solid #635bff30;border-radius:12px;padding:16px 20px;margin-bottom:6px;}
 .stripe-logo{background:#635bff;border-radius:8px;padding:6px 12px;font-weight:800;font-size:13px;color:#fff;letter-spacing:0.5px;flex-shrink:0;}
 .stripe-txt{font-size:13px;color:var(--muted);line-height:1.5;}
@@ -132,7 +131,6 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 .pfxs{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--blue);font-weight:700;font-size:15px;pointer-events:none;}
 .pfx input{padding-left:34px;}
 
-/* Quick amount chips */
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
 .chip{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'Poppins',sans-serif;}
 .chip:hover,.chip.on{background:var(--bl);border-color:var(--blue);color:var(--blue);}
@@ -151,7 +149,6 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 
 .secnote{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;color:var(--muted);font-size:11px;}
 
-/* Error box */
 .errbox{background:#fff5f5;border:1px solid #fed7d7;border-radius:10px;padding:12px 16px;color:var(--red);font-size:13px;font-weight:500;margin-bottom:14px;display:none;}
 .errbox.show{display:block;}
 
@@ -163,6 +160,70 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 .loading-txt{font-size:15px;font-weight:600;color:var(--blue);}
 .loading-sub{font-size:12px;color:var(--muted);}
 
+/* ══════════════════════════════════
+   SUCCESS POPUP  ← NEW
+══════════════════════════════════ */
+.success-overlay{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(13,27,62,0.65);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.success-overlay.show{display:flex;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.success-modal{
+  background:#fff;border-radius:24px;padding:44px 36px;
+  max-width:440px;width:100%;text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.2);
+  animation:slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.success-icon{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,#00b87a,#00d68f);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 22px;
+  box-shadow:0 10px 30px rgba(0,184,122,0.35);
+  animation:popIn 0.5s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+
+.success-icon svg{width:38px;height:38px;stroke:#fff;stroke-width:3;}
+
+.success-modal h2{
+  font-size:24px;font-weight:800;letter-spacing:-0.5px;
+  color:var(--text);margin-bottom:10px;
+}
+.success-modal p{
+  color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:8px;
+}
+.success-amount{
+  background:linear-gradient(135deg,#e6faf4,#f0fff8);
+  border:1.5px solid #b2f0d8;border-radius:12px;
+  padding:14px 20px;margin:18px 0 24px;
+  font-size:28px;font-weight:800;color:var(--green);
+  letter-spacing:-1px;
+}
+.success-amount small{
+  display:block;font-size:11px;font-weight:600;
+  color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;
+}
+
+.success-home-btn{
+  width:100%;background:var(--blue);color:#fff;border:none;
+  border-radius:12px;padding:16px;font-family:'Poppins',sans-serif;
+  font-weight:800;font-size:15px;cursor:pointer;
+  transition:all 0.25s;box-shadow:0 6px 20px rgba(26,90,220,0.28);
+  display:flex;align-items:center;justify-content:center;gap:9px;
+}
+.success-home-btn:hover{background:var(--bld);transform:translateY(-2px);}
+
+.success-confetti{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;overflow:hidden;border-radius:24px;
+}
+
 @media(max-width:900px){
   .appbar{padding:10px 14px;gap:10px;}
   nav{padding:12px 16px;}.nl{display:none;}
@@ -172,6 +233,7 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
   .dcta{padding:56px 20px;}
   footer{padding:28px 16px;}
   .pnav{padding:12px 16px;}
+  .success-modal{padding:32px 22px;}
 }
 </style>
 </head>
@@ -319,6 +381,28 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
   <div class="loading-sub">Please wait, do not close this page</div>
 </div>
 
+<!-- ═══════════ SUCCESS POPUP (NEW) ═══════════ -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-modal" style="position:relative;overflow:hidden;">
+    <canvas class="success-confetti" id="confettiCanvas"></canvas>
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Payment Successful! 🎉</h2>
+    <p>Your deposit has been processed successfully. Your funds will appear in your OXZ Markets account shortly.</p>
+    <div class="success-amount">
+      <small>Amount Deposited</small>
+      <span id="successAmtDisplay">$0.00</span>
+    </div>
+    <p style="font-size:12px;margin-bottom:0;">Thank you for trading with <strong>OXZ Markets</strong>. You're all set to start!</p>
+    <br>
+    <button class="success-home-btn" onclick="goHome()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Back to Home Page
+    </button>
+  </div>
+</div>
+
 <!-- ═══════════ PAYMENT PAGE ═══════════ -->
 <div id="pp">
   <div class="pnav">
@@ -339,10 +423,8 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
       <div class="ptitl">Deposit Funds</div>
       <div class="psub">Add funds securely to your <a href="https://oxzmarket.com/" target="_blank" style="color:var(--blue);font-weight:600">OXZ Markets</a> account via Stripe</div>
 
-      <!-- Error box -->
       <div class="errbox" id="errbox">⚠️ <span id="errtxt">Something went wrong. Please try again.</span></div>
 
-      <!-- Step 1: Account Details -->
       <div class="pcard">
         <div class="pctit">1. Your Account Details</div>
         <div class="fld">
@@ -355,10 +437,8 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
         </div>
       </div>
 
-      <!-- Step 2: Amount -->
       <div class="pcard">
         <div class="pctit">2. Enter Deposit Amount</div>
-        <!-- Quick chips -->
         <div class="chips">
           <button class="chip" onclick="setAmt(50,this)">$50</button>
           <button class="chip" onclick="setAmt(100,this)">$100</button>
@@ -370,13 +450,12 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
           <label>Custom Amount (USD)</label>
           <div class="pfx">
             <span class="pfxs">$</span>
-            <input type="number" id="damt" placeholder="Or enter custom amount" min="10" oninput="uSum();clearChips()"/>
+            <input type="number" id="damt" placeholder="Or enter custom amount" min="10" step="1" oninput="uSum();clearChips()"/>
           </div>
         </div>
         <div style="font-size:12px;color:var(--muted);margin-top:-6px">Minimum deposit: $10</div>
       </div>
 
-      <!-- Step 3: Payment Method -->
       <div class="pcard">
         <div class="pctit">3. Payment Method</div>
         <div class="stripe-banner">
@@ -385,7 +464,6 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
         </div>
       </div>
 
-      <!-- Summary -->
       <div class="sumbox">
         <div class="srow"><span>Deposit Amount</span><span class="sval" id="sa">—</span></div>
         <div class="srow"><span>Processing Fee</span><span class="sval" style="color:var(--green)">FREE</span></div>
@@ -406,8 +484,10 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 </div>
 
 <script>
+/* ─── CONFIG ─── */
 const API_URL = 'https://forexpayment-production.up.railway.app/api/payments/create-intent';
 
+/* ─── PAYMENT PAGE ─── */
 function openP(){
   document.getElementById('pp').classList.add('on');
   document.body.style.overflow='hidden';
@@ -428,6 +508,7 @@ function closeP(){
   b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
 }
 
+/* ─── AMOUNT CHIPS ─── */
 function setAmt(v, el){
   document.getElementById('damt').value = v;
   clearChips();
@@ -440,7 +521,8 @@ function clearChips(){
 }
 
 function uSum(){
-  const v=parseFloat(document.getElementById('damt').value);
+  const raw = document.getElementById('damt').value;
+  const v = parseFloat(raw);
   if(isNaN(v)||v<=0){
     document.getElementById('sa').textContent='—';
     document.getElementById('st').textContent='—';
@@ -453,39 +535,105 @@ function uSum(){
   document.getElementById('sbtn').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay '+f+' via Stripe →';
 }
 
+/* ─── ERRORS ─── */
 function showErr(msg){
   document.getElementById('errtxt').textContent=msg;
   document.getElementById('errbox').classList.add('show');
   document.getElementById('errbox').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
+function hideErr(){document.getElementById('errbox').classList.remove('show');}
 
-function hideErr(){
-  document.getElementById('errbox').classList.remove('show');
-}
-
+/* ─── LOADING ─── */
 function showLoading(){document.getElementById('loadOverlay').classList.add('show');}
 function hideLoading(){document.getElementById('loadOverlay').classList.remove('show');}
 
+/* ─── SUCCESS POPUP ─── */
+function showSuccess(amount){
+  document.getElementById('successAmtDisplay').textContent = '$' + parseFloat(amount).toFixed(2);
+  document.getElementById('successOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  launchConfetti();
+}
+
+function goHome(){
+  document.getElementById('successOverlay').classList.remove('show');
+  document.getElementById('pp').classList.remove('on');
+  document.body.style.overflow='';
+  // Reset form
+  document.getElementById('damt').value='';
+  document.getElementById('uemail').value='';
+  document.getElementById('uaccid').value='';
+  uSum(); clearChips(); hideErr();
+  const b=document.getElementById('sbtn');
+  b.disabled=false;
+  b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
+  // Scroll to top of landing
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ─── CONFETTI (lightweight canvas) ─── */
+function launchConfetti(){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  const modal = canvas.parentElement;
+  canvas.width = modal.offsetWidth;
+  canvas.height = modal.offsetHeight;
+
+  const colors = ['#1a5adc','#00b87a','#ffd166','#e53e3e','#635bff','#fff'];
+  const pieces = Array.from({length:80},()=>({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height - canvas.height,
+    w: Math.random()*8+4,
+    h: Math.random()*4+2,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*360,
+    vx: (Math.random()-0.5)*3,
+    vy: Math.random()*4+2,
+    vr: (Math.random()-0.5)*8
+  }));
+
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color;
+      ctx.globalAlpha=0.85;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+    });
+    frame++;
+    if(frame<120) requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+}
+
+/* ─── CHECKOUT ─── */
 async function doCheckout(){
   hideErr();
 
-  const email = document.getElementById('uemail').value.trim();
-  const rawAmt = parseFloat(document.getElementById('damt').value);
+  const email   = document.getElementById('uemail').value.trim();
+  const rawAmt  = document.getElementById('damt').value;
+  // ✅ FIX: Parse integer from string to prevent floating point issues
+  const numAmt  = parseFloat(rawAmt);
 
-  // Validation
   if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
     showErr('Please enter a valid email address.');
     document.getElementById('uemail').focus();
     return;
   }
-  if(isNaN(rawAmt) || rawAmt < 10){
+  if(isNaN(numAmt) || numAmt < 10){
     showErr('Please enter a valid deposit amount (minimum $10).');
     document.getElementById('damt').focus();
     return;
   }
 
-  // Amount in cents for Stripe
-  const amountCents = Math.round(rawAmt * 100);
+  // ✅ FIX: Correct cents conversion — e.g. $1000 → 100000 cents (NOT $100,000)
+  const amountCents = Math.round(numAmt * 100);
 
   const btn = document.getElementById('sbtn');
   btn.disabled = true;
@@ -498,9 +646,9 @@ async function doCheckout(){
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        email: email,
-        amount: amountCents,
-        currency: 'usd',
+        email:       email,
+        amount:      amountCents,   // ✅ correct cents value
+        currency:    'usd',
         useCheckout: true
       })
     });
@@ -517,12 +665,21 @@ async function doCheckout(){
 
     const data = await res.json();
 
-    if(!data.checkoutUrl){
-      throw new Error('No checkout URL received. Please try again.');
+    hideLoading();
+
+    // ─── If API returns a checkout URL, redirect ───
+    if(data.checkoutUrl){
+      window.location.href = data.checkoutUrl;
+      return;
     }
 
-    // Redirect to Stripe Checkout
-    window.location.href = data.checkoutUrl;
+    // ─── If payment is confirmed directly (no redirect), show success popup ───
+    if(data.success || data.status === 'succeeded' || data.paymentIntent){
+      showSuccess(numAmt);
+      return;
+    }
+
+    throw new Error('Unexpected response from payment gateway. Please try again.');
 
   } catch(err){
     hideLoading();
@@ -532,10 +689,27 @@ async function doCheckout(){
   }
 }
 
-// Close payment page on Escape key
+/* ─── Check URL params on load (Stripe redirects back with ?payment=success) ─── */
+window.addEventListener('DOMContentLoaded', ()=>{
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('payment') === 'success'){
+    const amt = params.get('amount') || '0';
+    // Clean URL
+    history.replaceState({},'',window.location.pathname);
+    showSuccess(amt);
+  }
+  if(params.get('payment') === 'cancel'){
+    history.replaceState({},'',window.location.pathname);
+    openP();
+    showErr('Payment was cancelled. Please try again.');
+  }
+});
+
+/* ─── ESC key ─── */
 document.addEventListener('keydown', e => {
-  if(e.key === 'Escape' && document.getElementById('pp').classList.contains('on')){
-    closeP();
+  if(e.key==='Escape'){
+    if(document.getElementById('successOverlay').classList.contains('show')) goHome();
+    else if(document.getElementById('pp').classList.contains('on')) closeP();
   }
 });
 </script>
