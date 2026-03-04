@@ -132,6 +132,8 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-txt{font-size:15px;font-weight:600;color:var(--blue);}
 .loading-sub{font-size:12px;color:var(--muted);}
+
+/* SUCCESS POPUP */
 .suc-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(13,27,62,0.72);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
 .suc-overlay.show{display:flex;animation:fo 0.3s ease;}
 @keyframes fo{from{opacity:0}to{opacity:1}}
@@ -150,6 +152,7 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 .suc-homebtn:hover{background:var(--bld);transform:translateY(-2px);}
 .suc-note{font-size:11px;color:var(--muted);}
 #confetti{position:absolute;inset:0;pointer-events:none;border-radius:28px;}
+
 @media(max-width:900px){
   .appbar{padding:10px 14px;gap:10px;}
   nav{padding:12px 16px;}.nl{display:none;}
@@ -165,6 +168,7 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
 </style>
 </head>
 <body>
+
 <div id="landing">
 <div class="appbar">
   <div class="appbar-txt">📱 Download <b>OXZ Markets App (OXZ6)</b> — Trade anywhere, anytime!</div>
@@ -285,11 +289,15 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
   <div class="fbot">© 2026 OXZ Markets · <a href="https://oxzmarket.com/" target="_blank" style="color:rgba(255,255,255,0.5);text-decoration:none">oxzmarket.com</a> · All rights reserved · Trading involves risk.</div>
 </footer>
 </div>
+
+<!-- LOADING -->
 <div class="loading-overlay" id="loadOverlay">
   <div class="spinner"></div>
   <div class="loading-txt">Connecting to Stripe...</div>
   <div class="loading-sub">Please wait, do not close this page</div>
 </div>
+
+<!-- SUCCESS POPUP -->
 <div class="suc-overlay" id="sucOverlay">
   <div class="suc-modal">
     <canvas id="confetti"></canvas>
@@ -310,6 +318,8 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
     <div class="suc-note">Thank you for trading with <strong>OXZ Markets</strong> · oxzmarket.com</div>
   </div>
 </div>
+
+<!-- PAYMENT PAGE -->
 <div id="pp">
   <div class="pnav">
     <button class="pbk" onclick="closeP()">
@@ -329,8 +339,14 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
       <div class="errbox" id="errbox">⚠️ <span id="errtxt"></span></div>
       <div class="pcard">
         <div class="pctit">1. Your Account Details</div>
-        <div class="fld"><label>Email Address</label><input type="email" id="uemail" placeholder="your@email.com"/></div>
-        <div class="fld"><label>OXZ Account ID (optional)</label><input type="text" id="uaccid" placeholder="Your OXZ Markets account ID or username"/></div>
+        <div class="fld">
+          <label>Email Address</label>
+          <input type="email" id="uemail" placeholder="your@email.com"/>
+        </div>
+        <div class="fld">
+          <label>OXZ Account ID (optional)</label>
+          <input type="text" id="uaccid" placeholder="Your OXZ Markets account ID or username"/>
+        </div>
       </div>
       <div class="pcard">
         <div class="pctit">2. Enter Deposit Amount</div>
@@ -343,7 +359,10 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
         </div>
         <div class="fld">
           <label>Custom Amount (USD)</label>
-          <div class="pfx"><span class="pfxs">$</span><input type="number" id="damt" placeholder="Or enter custom amount" min="10" step="1" oninput="uSum();clearChips()"/></div>
+          <div class="pfx">
+            <span class="pfxs">$</span>
+            <input type="number" id="damt" placeholder="Or enter custom amount" min="10" step="1" oninput="uSum();clearChips()"/>
+          </div>
         </div>
         <div style="font-size:12px;color:var(--muted);margin-top:-6px">Minimum deposit: $10</div>
       </div>
@@ -370,8 +389,10 @@ footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
     </div>
   </div>
 </div>
+
 <script>
-var API_URL='https://forexpayment-production.up.railway.app/api/payments/create-intent';
+const API_URL = 'https://forexpayment-production.up.railway.app/api/payments/create-intent';
+
 function openP(){document.getElementById('pp').classList.add('on');document.body.style.overflow='hidden';hideErr();}
 function closeP(){document.getElementById('pp').classList.remove('on');document.body.style.overflow='';resetForm();}
 function resetForm(){
@@ -379,30 +400,33 @@ function resetForm(){
   document.getElementById('uemail').value='';
   document.getElementById('uaccid').value='';
   uSum();clearChips();hideErr();
-  var b=document.getElementById('sbtn');
+  const b=document.getElementById('sbtn');
   b.disabled=false;
   b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
 }
 function setAmt(v,el){document.getElementById('damt').value=v;clearChips();el.classList.add('on');uSum();}
-function clearChips(){document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});}
+function clearChips(){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));}
 function uSum(){
-  var v=parseFloat(document.getElementById('damt').value);
+  const v=parseFloat(document.getElementById('damt').value);
   if(isNaN(v)||v<=0){
-    document.getElementById('sa').textContent='—';document.getElementById('st').textContent='—';
+    document.getElementById('sa').textContent='—';
+    document.getElementById('st').textContent='—';
     document.getElementById('sbtn').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
     return;
   }
-  var f='$'+v.toFixed(2);
-  document.getElementById('sa').textContent=f;document.getElementById('st').textContent=f;
+  const f='$'+v.toFixed(2);
+  document.getElementById('sa').textContent=f;
+  document.getElementById('st').textContent=f;
   document.getElementById('sbtn').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay '+f+' via Stripe →';
 }
 function showErr(msg){document.getElementById('errtxt').textContent=msg;document.getElementById('errbox').classList.add('show');document.getElementById('errbox').scrollIntoView({behavior:'smooth',block:'nearest'});}
 function hideErr(){document.getElementById('errbox').classList.remove('show');}
 function showLoading(){document.getElementById('loadOverlay').classList.add('show');}
 function hideLoading(){document.getElementById('loadOverlay').classList.remove('show');}
+
+/* SUCCESS */
 function showSuccess(amount){
-  var a=parseFloat(amount);
-  document.getElementById('sucAmt').textContent='$'+(isNaN(a)?'0.00':a.toFixed(2));
+  document.getElementById('sucAmt').textContent='$'+parseFloat(amount).toFixed(2);
   document.getElementById('sucOverlay').classList.add('show');
   document.body.style.overflow='hidden';
   runConfetti();
@@ -414,61 +438,125 @@ function goHome(){
   resetForm();
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+/* CONFETTI */
 function runConfetti(){
-  var canvas=document.getElementById('confetti');
-  var modal=canvas.parentElement;
+  const canvas=document.getElementById('confetti');
+  const modal=canvas.parentElement;
   canvas.width=modal.offsetWidth;canvas.height=modal.offsetHeight;
-  var ctx=canvas.getContext('2d');
-  var cols=['#1a5adc','#00b87a','#ffd166','#e53e3e','#635bff','#fb923c'];
-  var bits=[];
-  for(var i=0;i<90;i++){bits.push({x:Math.random()*canvas.width,y:-(Math.random()*canvas.height*0.5),w:Math.random()*10+4,h:Math.random()*5+2,c:cols[Math.floor(Math.random()*cols.length)],r:Math.random()*360,vx:(Math.random()-0.5)*2.5,vy:Math.random()*3.5+1.5,vr:(Math.random()-0.5)*7});}
-  var f=0;
-  function draw(){
+  const ctx=canvas.getContext('2d');
+  const cols=['#1a5adc','#00b87a','#ffd166','#e53e3e','#635bff','#fb923c'];
+  const bits=Array.from({length:90},()=>({
+    x:Math.random()*canvas.width,y:-(Math.random()*canvas.height*0.5),
+    w:Math.random()*10+4,h:Math.random()*5+2,
+    c:cols[Math.floor(Math.random()*cols.length)],
+    r:Math.random()*360,vx:(Math.random()-0.5)*2.5,vy:Math.random()*3.5+1.5,vr:(Math.random()-0.5)*7
+  }));
+  let f=0;
+  (function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    bits.forEach(function(p){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r*Math.PI/180);ctx.fillStyle=p.c;ctx.globalAlpha=0.9;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;});
-    if(++f<150)requestAnimationFrame(draw);else ctx.clearRect(0,0,canvas.width,canvas.height);
-  }
-  draw();
+    bits.forEach(p=>{
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r*Math.PI/180);
+      ctx.fillStyle=p.c;ctx.globalAlpha=0.9;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();
+      p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+    });
+    if(++f<150)requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  })();
 }
+
+/* ════════════════════════════════════════
+   CHECKOUT — AMOUNT FIX
+   ────────────────────────────────────────
+   Aapka server DOLLARS expect karta hai.
+   Isliye sirf numAmt bhejte hain (koi *100 nahi).
+   $1000 → server ko milega 1000  ✅
+   $10   → server ko milega 10    ✅
+════════════════════════════════════════ */
 async function doCheckout(){
   hideErr();
-  var email=document.getElementById('uemail').value.trim();
-  var numAmt=parseFloat(document.getElementById('damt').value);
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('Please enter a valid email address.');document.getElementById('uemail').focus();return;}
-  if(isNaN(numAmt)||numAmt<10){showErr('Minimum deposit amount is $10.');document.getElementById('damt').focus();return;}
-  var btn=document.getElementById('sbtn');
+  const email=document.getElementById('uemail').value.trim();
+  const numAmt=parseFloat(document.getElementById('damt').value);
+
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    showErr('Please enter a valid email address.');
+    document.getElementById('uemail').focus();return;
+  }
+  if(isNaN(numAmt)||numAmt<10){
+    showErr('Minimum deposit amount is $10.');
+    document.getElementById('damt').focus();return;
+  }
+
+  const btn=document.getElementById('sbtn');
   btn.disabled=true;
   btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite"><path d="M12 2a10 10 0 0 1 10 10"/></svg> Connecting...';
   showLoading();
+
   try{
-    var res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,amount:numAmt,currency:'usd',useCheckout:true})});
-    if(!res.ok){var msg='Payment gateway error.';try{var d=await res.json();if(d.message)msg=d.message;else if(d.error)msg=d.error;}catch(e){}throw new Error(msg);}
-    var data=await res.json();
+    const res=await fetch(API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        email:email,
+        amount: numAmt,      // ← DOLLARS only, no *100
+        currency:'usd',
+        useCheckout:true
+      })
+    });
+
+    if(!res.ok){
+      let msg='Payment gateway error. Please try again.';
+      try{const d=await res.json();if(d.message)msg=d.message;else if(d.error)msg=d.error;}catch(e){}
+      throw new Error(msg);
+    }
+    const data=await res.json();
     hideLoading();
-    if(data.checkoutUrl){sessionStorage.setItem('oxz_amt',numAmt);window.location.href=data.checkoutUrl;return;}
-    if(data.success||data.status==='succeeded'){showSuccess(numAmt);return;}
+
+    if(data.checkoutUrl){
+      // Amount save karo — wapas aane par popup mein use hoga
+      sessionStorage.setItem('oxz_amt', numAmt);
+      window.location.href=data.checkoutUrl;
+      return;
+    }
+    if(data.success||data.status==='succeeded'){
+      showSuccess(numAmt);return;
+    }
     throw new Error('Unexpected response. Please try again.');
+
   }catch(err){
-    hideLoading();btn.disabled=false;
+    hideLoading();
+    btn.disabled=false;
     btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
     showErr(err.message||'Something went wrong. Please try again.');
   }
 }
-window.addEventListener('DOMContentLoaded',function(){
-  var p=new URLSearchParams(window.location.search);
+
+/* ════════════════════════════════════════
+   STRIPE RETURN — URL PARAMS
+
+   Apne Railway backend mein Stripe ki
+   success_url yeh set karo:
+   https://yoursite.com/?payment=success
+
+   cancel_url:
+   https://yoursite.com/?payment=cancel
+════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded',()=>{
+  const p=new URLSearchParams(window.location.search);
   if(p.get('payment')==='success'){
-    history.replaceState({},'','/');
-    var amt=sessionStorage.getItem('oxz_amt')||'0';
+    history.replaceState({},'',window.location.pathname);
+    const amt=sessionStorage.getItem('oxz_amt')||'0';
     sessionStorage.removeItem('oxz_amt');
     showSuccess(parseFloat(amt));
   }
   if(p.get('payment')==='cancel'){
-    history.replaceState({},'','/');
+    history.replaceState({},'',window.location.pathname);
     openP();
     showErr('Payment was cancelled. You can try again.');
   }
 });
-document.addEventListener('keydown',function(e){
+
+document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
     if(document.getElementById('sucOverlay').classList.contains('show'))goHome();
     else if(document.getElementById('pp').classList.contains('on'))closeP();
