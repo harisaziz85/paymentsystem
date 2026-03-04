@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Payment Successful – OXZ Markets</title>
+<script>
+  // Stripe se aane wale orderId ya koi bhi param le lo
+  const params = window.location.search; // ?orderId=xxx
+  // Main page par redirect karo with payment=success
+  window.location.replace('/?payment=success' + (params ? '&' + params.slice(1) : ''));
+</script>
+</head>
+<body>
+  <p style="font-family:sans-serif;text-align:center;margin-top:100px;">
+    Processing your payment... Please wait.
+  </p>
+</body>
+</html>
