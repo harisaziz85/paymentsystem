@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OXZ Markets – Deposit & Start Trading</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1a5adc;--bld:#0f3d9e;--bl:#e8f0fd;--green:#00b87a;--red:#e53e3e;--bg:#f4f7fc;--text:#1a202c;--muted:#6b7a99;--border:#dde3f0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text);overflow-x:hidden;}
+
+/* APP BAR */
+.appbar{background:#0d1b3e;padding:10px 40px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;}
+.appbar-txt{color:rgba(255,255,255,0.75);font-size:13px;font-weight:500;}
+.appbar-txt b{color:#fff;}
+.abtn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:8px 16px;text-decoration:none;color:#fff;font-size:12px;font-weight:600;transition:all 0.2s;white-space:nowrap;}
+.abtn:hover{background:rgba(255,255,255,0.2);}
+.abtn .ab{display:flex;flex-direction:column;line-height:1.2;}
+.abtn .ab small{font-size:9px;opacity:0.65;}
+.abtn .ab strong{font-size:13px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 50px;background:#fff;box-shadow:0 2px 10px rgba(26,90,220,0.08);}
+.lbox{background:var(--blue);color:#fff;font-weight:800;font-size:20px;padding:5px 13px;border-radius:6px;letter-spacing:1px;text-decoration:none;}
+.nl{display:flex;gap:28px;}
+.nl a{text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;transition:color 0.2s;}
+.nl a:hover{color:var(--blue);}
+.nr{display:flex;gap:10px;align-items:center;}
+.nout{border:1.5px solid var(--blue);color:var(--blue);background:transparent;padding:8px 20px;border-radius:6px;font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s;}
+.nout:hover{background:var(--bl);}
+.nfil{background:var(--blue);color:#fff;border:none;padding:8px 20px;border-radius:6px;font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.2s;}
+.nfil:hover{background:var(--bld);}
+
+/* HERO */
+.hero{padding:80px 50px;background:linear-gradient(135deg,#f0f5ff 0%,#e8f0fd 55%,#fff 100%);display:flex;justify-content:center;}
+.hi{max-width:1180px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.htag{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:22px;box-shadow:0 2px 8px rgba(26,90,220,0.07);}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
+.hero h1{font-size:clamp(34px,4vw,58px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;}
+.hero h1 em{color:var(--blue);font-style:normal;}
+.hero .desc{margin-top:16px;color:var(--muted);font-size:15px;line-height:1.8;}
+.hcta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
+.bblu{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:14px 34px;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.25s;text-decoration:none;box-shadow:0 6px 20px rgba(26,90,220,0.28);}
+.bblu:hover{background:var(--bld);transform:translateY(-2px);}
+.bgho{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--blue);border:1.5px solid var(--border);border-radius:8px;padding:14px 26px;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:all 0.25s;text-decoration:none;}
+.bgho:hover{border-color:var(--blue);background:var(--bl);}
+.hsts{display:flex;gap:32px;margin-top:40px;flex-wrap:wrap;}
+.hn{font-size:24px;font-weight:800;color:var(--blue);}
+.hl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+/* chart */
+.hv{position:relative;}
+.fpill{position:absolute;top:-14px;right:-14px;background:var(--blue);color:#fff;border-radius:50px;padding:10px 18px;font-weight:700;font-size:13px;box-shadow:0 6px 20px rgba(26,90,220,0.35);cursor:pointer;animation:flt 3s ease-in-out infinite;z-index:2;}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.ccard{background:#fff;border-radius:20px;padding:26px;box-shadow:0 20px 60px rgba(26,90,220,0.1),0 2px 8px rgba(0,0,0,0.05);border:1px solid var(--border);}
+.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
+.cpair{font-weight:700;font-size:16px;}
+.csub{font-size:11px;color:var(--muted);margin-top:2px;}
+.cprc{font-size:26px;font-weight:800;color:var(--green);}
+.cchg{font-size:12px;color:var(--green);background:#e6faf4;border-radius:4px;padding:3px 8px;margin-top:4px;display:inline-block;}
+.csvg{width:100%;height:140px;}
+.mrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;}
+.mc{background:var(--bg);border-radius:10px;padding:11px;border:1px solid var(--border);}
+.mcp{font-size:10px;color:var(--muted);font-weight:600;}
+.mcv{font-size:13px;font-weight:700;margin-top:3px;}
+.mcc{font-size:10px;margin-top:1px;}
+.up{color:var(--green);}.dn{color:var(--red);}
+
+/* BANNER */
+.bnr{background:var(--blue);color:#fff;text-align:center;padding:15px 20px;font-size:13px;font-weight:500;}
+.bnr a{color:#ffd166;font-weight:700;text-decoration:none;}
+
+/* FEATURES */
+.fsec{padding:80px 50px;background:#fff;}
+.stop{text-align:center;margin-bottom:50px;}
+.stag{display:inline-block;background:var(--bl);color:var(--blue);border-radius:100px;padding:5px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.sttl{font-size:clamp(24px,2.8vw,38px);font-weight:800;letter-spacing:-1px;}
+.sttl span{color:var(--blue);}
+.ssub{color:var(--muted);font-size:14px;margin-top:8px;}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1080px;margin:0 auto;}
+.fcard{background:var(--bg);border-radius:16px;padding:28px;border:1px solid var(--border);transition:all 0.3s;}
+.fcard:hover{border-color:var(--blue);background:#fff;box-shadow:0 8px 30px rgba(26,90,220,0.1);transform:translateY(-3px);}
+.fico{width:48px;height:48px;border-radius:12px;background:var(--bl);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;}
+.fcard h3{font-size:16px;font-weight:700;margin-bottom:8px;}
+.fcard p{color:var(--muted);font-size:13px;line-height:1.7;}
+
+/* DEPOSIT CTA */
+.dcta{padding:80px 50px;background:linear-gradient(135deg,var(--blue) 0%,#0f3d9e 100%);text-align:center;position:relative;overflow:hidden;}
+.dcta::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;}
+.dcta h2{font-size:clamp(26px,3vw,44px);font-weight:800;color:#fff;letter-spacing:-1px;position:relative;z-index:1;margin-bottom:12px;}
+.dcta p{color:rgba(255,255,255,0.72);font-size:15px;max-width:460px;margin:0 auto 32px;position:relative;z-index:1;}
+.bwhi{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--blue);border:none;border-radius:8px;padding:15px 42px;font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;cursor:pointer;transition:all 0.25s;box-shadow:0 8px 28px rgba(0,0,0,0.15);position:relative;z-index:1;}
+.bwhi:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,0.2);}
+
+/* FOOTER */
+footer{background:#0d1b3e;color:rgba(255,255,255,0.5);padding:34px 50px;}
+.finner{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px;max-width:1180px;margin:0 auto;}
+.flgo{color:#fff;font-weight:800;font-size:18px;}
+.flgo span{color:#ffd166;}
+.flnk h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:12px;}
+.flnk a{display:block;color:rgba(255,255,255,0.5);font-size:12px;text-decoration:none;margin-bottom:8px;transition:color 0.2s;}
+.flnk a:hover{color:#fff;}
+.fbot{border-top:1px solid rgba(255,255,255,0.08);margin-top:28px;padding-top:20px;text-align:center;font-size:11px;}
+
+/* PAYMENT PAGE */
+#pp{display:none;position:fixed;inset:0;z-index:200;background:var(--bg);overflow-y:auto;}
+#pp.on{display:flex;flex-direction:column;}
+.pnav{padding:14px 50px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.pbk{display:flex;align-items:center;gap:7px;color:var(--muted);cursor:pointer;font-size:13px;font-weight:500;border:none;background:none;font-family:'Poppins',sans-serif;transition:color 0.2s;}
+.pbk:hover{color:var(--blue);}
+.pbody{flex:1;display:flex;justify-content:center;padding:44px 20px;}
+.pwrap{width:100%;max-width:520px;}
+.ptitl{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;}
+.psub{color:var(--muted);font-size:14px;margin-bottom:28px;}
+.pcard{background:#fff;border-radius:14px;padding:24px;border:1px solid var(--border);margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
+.pctit{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px;}
+
+/* Stripe only — single payment method highlighted */
+.stripe-banner{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#635bff10,#635bff05);border:1.5px solid #635bff30;border-radius:12px;padding:16px 20px;margin-bottom:6px;}
+.stripe-logo{background:#635bff;border-radius:8px;padding:6px 12px;font-weight:800;font-size:13px;color:#fff;letter-spacing:0.5px;flex-shrink:0;}
+.stripe-txt{font-size:13px;color:var(--muted);line-height:1.5;}
+.stripe-txt strong{color:var(--text);}
+
+.fld{margin-bottom:14px;}
+.fld label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:0.8px;}
+.fld input,.fld select{width:100%;background:#fff;border:1.5px solid var(--border);color:var(--text);border-radius:10px;padding:13px 15px;font-family:'Poppins',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+.fld input:focus,.fld select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,90,220,0.08);}
+.fld input::placeholder{color:#b8c4d4;}
+.pfx{position:relative;}
+.pfxs{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--blue);font-weight:700;font-size:15px;pointer-events:none;}
+.pfx input{padding-left:34px;}
+
+/* Quick amount chips */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.chip{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'Poppins',sans-serif;}
+.chip:hover,.chip.on{background:var(--bl);border-color:var(--blue);color:var(--blue);}
+
+.sumbox{background:#fff;border-radius:12px;padding:16px;border:1px solid var(--border);margin-bottom:18px;}
+.srow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.srow:last-child{border-bottom:none;padding-top:12px;}
+.srow span:first-child{color:var(--muted);}
+.sval{font-weight:600;}
+.srow.tot span:first-child{font-weight:700;color:var(--text);font-size:14px;}
+.srow.tot .sval{color:var(--blue);font-size:19px;font-weight:800;}
+
+.bsub{width:100%;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:17px;font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;cursor:pointer;transition:all 0.25s;box-shadow:0 6px 20px rgba(26,90,220,0.28);display:flex;align-items:center;justify-content:center;gap:9px;}
+.bsub:hover:not(:disabled){background:var(--bld);transform:translateY(-2px);}
+.bsub:disabled{opacity:0.7;cursor:not-allowed;transform:none;}
+
+.secnote{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;color:var(--muted);font-size:11px;}
+
+/* Error box */
+.errbox{background:#fff5f5;border:1px solid #fed7d7;border-radius:10px;padding:12px 16px;color:var(--red);font-size:13px;font-weight:500;margin-bottom:14px;display:none;}
+.errbox.show{display:block;}
+
+/* Loading overlay */
+.loading-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(255,255,255,0.92);backdrop-filter:blur(4px);align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.loading-overlay.show{display:flex;}
+.spinner{width:48px;height:48px;border:4px solid var(--bl);border-top-color:var(--blue);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-txt{font-size:15px;font-weight:600;color:var(--blue);}
+.loading-sub{font-size:12px;color:var(--muted);}
+
+@media(max-width:900px){
+  .appbar{padding:10px 14px;gap:10px;}
+  nav{padding:12px 16px;}.nl{display:none;}
+  .hero{padding:60px 16px;}.hi{grid-template-columns:1fr;gap:36px;}
+  .hv{order:-1;}.fpill{top:-10px;right:0;}
+  .fsec{padding:56px 16px;}.fgrid{grid-template-columns:1fr;}
+  .dcta{padding:56px 20px;}
+  footer{padding:28px 16px;}
+  .pnav{padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<div id="landing">
+
+<!-- APP BAR -->
+<div class="appbar">
+  <div class="appbar-txt">📱 Download <b>OXZ Markets App (OXZ6)</b> — Trade anywhere, anytime!</div>
+  <a class="abtn" href="https://play.google.com/store/search?q=oxz6&c=apps" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.98.2l11.93-11.93L12 8l-8.82 14.5zm17.29-13.2-2.84-1.64L14.1 12l3.53 3.53 2.84-1.64a1.75 1.75 0 000-3.33zM2.01 1.05A1.75 1.75 0 001.75 2v20c0 .33.09.65.26.95L14.1 12zm2.15-1.01A1.75 1.75 0 003.18.24L15.1 12l3.03-3.03z"/></svg>
+    <div class="ab"><small>Get it on</small><strong>Google Play</strong></div>
+  </a>
+  <a class="abtn" href="https://apps.apple.com/search?term=oxz6" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    <div class="ab"><small>Download on the</small><strong>App Store</strong></div>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="lbox" href="https://oxzmarket.com/" target="_blank">OXZ</a>
+  <div class="nl">
+    <a href="https://oxzmarket.com/" target="_blank">Home</a>
+    <a href="https://oxzmarket.com/" target="_blank">Trading</a>
+    <a href="https://oxzmarket.com/" target="_blank">Markets</a>
+    <a href="https://oxzmarket.com/" target="_blank">Platforms</a>
+    <a href="https://oxzmarket.com/" target="_blank">Contact</a>
+  </div>
+  <div class="nr">
+    <a class="nout" href="https://oxzmarket.com/" target="_blank">Visit Website</a>
+    <button class="nfil" onclick="openP()">Deposit Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hi">
+    <div>
+      <div class="htag"><span class="dot"></span>&nbsp;Live Markets · 24/7 Trading</div>
+      <h1>Your Window to<br><em>Fair Forex</em><br>Trading</h1>
+      <p class="desc">Trade with a leading Forex broker. Ultra-tight spreads, maximum market access, and expert support around the clock.</p>
+      <div class="hcta">
+        <button class="bblu" onclick="openP()">💳 Deposit &amp; Start Trading <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        <a class="bgho" href="https://oxzmarket.com/" target="_blank">Visit OXZ Markets</a>
+      </div>
+      <div class="hsts">
+        <div><div class="hn">1M+</div><div class="hl">Users</div></div>
+        <div><div class="hn">2.5M</div><div class="hl">Monthly Trades</div></div>
+        <div><div class="hn">6K+</div><div class="hl">Live Now</div></div>
+      </div>
+    </div>
+    <div class="hv">
+      <div class="fpill" onclick="openP()">💰 Deposit Now →</div>
+      <div class="ccard">
+        <div class="ctop">
+          <div><div class="cpair">EUR / USD</div><div class="csub">Forex · Live</div></div>
+          <div style="text-align:right"><div class="cprc">1.0842</div><span class="cchg">▲ +0.34%</span></div>
+        </div>
+        <svg class="csvg" viewBox="0 0 420 140">
+          <line x1="0" y1="35" x2="420" y2="35" stroke="#eaeef8" stroke-width="1"/>
+          <line x1="0" y1="70" x2="420" y2="70" stroke="#eaeef8" stroke-width="1"/>
+          <line x1="0" y1="105" x2="420" y2="105" stroke="#eaeef8" stroke-width="1"/>
+          <line x1="30" y1="50" x2="30" y2="90" stroke="#e53e3e" stroke-width="1.5"/><rect x="23" y="58" width="14" height="24" fill="#e53e3e" rx="2"/>
+          <line x1="60" y1="46" x2="60" y2="88" stroke="#e53e3e" stroke-width="1.5"/><rect x="53" y="53" width="14" height="22" fill="#e53e3e" rx="2"/>
+          <line x1="90" y1="54" x2="90" y2="92" stroke="#00b87a" stroke-width="1.5"/><rect x="83" y="57" width="14" height="22" fill="#00b87a" rx="2"/>
+          <line x1="120" y1="40" x2="120" y2="78" stroke="#00b87a" stroke-width="1.5"/><rect x="113" y="43" width="14" height="24" fill="#00b87a" rx="2"/>
+          <line x1="150" y1="50" x2="150" y2="84" stroke="#e53e3e" stroke-width="1.5"/><rect x="143" y="55" width="14" height="19" fill="#e53e3e" rx="2"/>
+          <line x1="180" y1="34" x2="180" y2="72" stroke="#00b87a" stroke-width="1.5"/><rect x="173" y="38" width="14" height="24" fill="#00b87a" rx="2"/>
+          <line x1="210" y1="28" x2="210" y2="64" stroke="#00b87a" stroke-width="1.5"/><rect x="203" y="32" width="14" height="22" fill="#00b87a" rx="2"/>
+          <line x1="240" y1="42" x2="240" y2="80" stroke="#e53e3e" stroke-width="1.5"/><rect x="233" y="48" width="14" height="20" fill="#e53e3e" rx="2"/>
+          <line x1="270" y1="24" x2="270" y2="62" stroke="#00b87a" stroke-width="1.5"/><rect x="263" y="28" width="14" height="24" fill="#00b87a" rx="2"/>
+          <line x1="300" y1="18" x2="300" y2="53" stroke="#00b87a" stroke-width="1.5"/><rect x="293" y="22" width="14" height="20" fill="#00b87a" rx="2"/>
+          <line x1="330" y1="36" x2="330" y2="70" stroke="#e53e3e" stroke-width="1.5"/><rect x="323" y="42" width="14" height="18" fill="#e53e3e" rx="2"/>
+          <line x1="360" y1="14" x2="360" y2="47" stroke="#00b87a" stroke-width="1.5"/><rect x="353" y="18" width="14" height="20" fill="#00b87a" rx="2"/>
+          <line x1="390" y1="10" x2="390" y2="41" stroke="#00b87a" stroke-width="1.5"/><rect x="383" y="13" width="14" height="18" fill="#00b87a" rx="2"/>
+        </svg>
+        <div class="mrow">
+          <div class="mc"><div class="mcp">GBP/USD</div><div class="mcv up">1.2631</div><div class="mcc up">+0.21%</div></div>
+          <div class="mc"><div class="mcp">XAU/USD</div><div class="mcv up">2,318</div><div class="mcc up">+0.87%</div></div>
+          <div class="mc"><div class="mcp">BTC/USD</div><div class="mcv dn">83,240</div><div class="mcc dn">-1.14%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bnr">⚡ Ultra-Tight Spreads · Maximum Market Access · <a href="https://oxzmarket.com/" target="_blank">oxzmarket.com</a></div>
+
+<!-- FEATURES -->
+<section class="fsec">
+  <div class="stop">
+    <div class="stag">Why OXZ Markets</div>
+    <h2 class="sttl">Trade with <span>Confidence</span></h2>
+    <p class="ssub">Everything you need to execute, learn, and grow as a trader.</p>
+  </div>
+  <div class="fgrid">
+    <div class="fcard"><div class="fico">⚡</div><h3>Execute Instantly</h3><p>No delays, no requotes. Your orders execute at the best available price every time.</p></div>
+    <div class="fcard"><div class="fico">📞</div><h3>24/7 Support</h3><p>Our dedicated support team is available around the clock whenever you need help.</p></div>
+    <div class="fcard"><div class="fico">🛡️</div><h3>Safe &amp; Regulated</h3><p>Trade with fair and transparent limits. Your funds are always fully protected.</p></div>
+    <div class="fcard"><div class="fico">📚</div><h3>Expert Education</h3><p>Live webinars, beginner courses, and daily market analysis for all skill levels.</p></div>
+    <div class="fcard"><div class="fico">📱</div><h3>Mobile Trading</h3><p>Available on Web, iOS &amp; Android via <b>OXZ6</b> app, plus MT4 and MT5 platforms.</p></div>
+    <div class="fcard"><div class="fico">💹</div><h3>Multiple Assets</h3><p>Forex, Stocks, Commodities, and Crypto — all from one powerful trading account.</p></div>
+  </div>
+</section>
+
+<!-- DEPOSIT CTA -->
+<section class="dcta">
+  <h2>Ready to Start Trading?</h2>
+  <p>Deposit funds securely and begin trading with OXZ Markets today. Powered by Stripe — safe &amp; instant.</p>
+  <button class="bwhi" onclick="openP()">💳 Deposit Now &amp; Start Trading <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="finner">
+    <div>
+      <div class="flgo">OXZ<span> Markets</span></div>
+      <p style="font-size:12px;margin-top:8px;max-width:240px;line-height:1.6">Your window to fair Forex trading. Ultra-tight spreads and maximum market access.</p>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <a href="https://play.google.com/store/search?q=oxz6&c=apps" target="_blank" class="abtn" style="font-size:11px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.98.2l11.93-11.93L12 8l-8.82 14.5zm17.29-13.2-2.84-1.64L14.1 12l3.53 3.53 2.84-1.64a1.75 1.75 0 000-3.33zM2.01 1.05A1.75 1.75 0 001.75 2v20c0 .33.09.65.26.95L14.1 12zm2.15-1.01A1.75 1.75 0 003.18.24L15.1 12l3.03-3.03z"/></svg>
+          Google Play (OXZ6)
+        </a>
+        <a href="https://apps.apple.com/search?term=oxz6" target="_blank" class="abtn" style="font-size:11px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store (OXZ6)
+        </a>
+      </div>
+    </div>
+    <div class="flnk"><h4>Company</h4><a href="https://oxzmarket.com/" target="_blank">About Us</a><a href="https://oxzmarket.com/" target="_blank">Trading</a><a href="https://oxzmarket.com/" target="_blank">Markets</a><a href="https://oxzmarket.com/" target="_blank">Partners</a></div>
+    <div class="flnk"><h4>Assets</h4><a href="https://oxzmarket.com/" target="_blank">Forex</a><a href="https://oxzmarket.com/" target="_blank">Stocks</a><a href="https://oxzmarket.com/" target="_blank">Commodities</a><a href="https://oxzmarket.com/" target="_blank">Crypto</a></div>
+    <div class="flnk"><h4>Support</h4><a href="https://oxzmarket.com/" target="_blank">Contact Us</a><a href="https://oxzmarket.com/" target="_blank">FAQ</a><a href="https://oxzmarket.com/" target="_blank">Education</a><a href="https://oxzmarket.com/" target="_blank">News</a></div>
+  </div>
+  <div class="fbot">© 2026 OXZ Markets · <a href="https://oxzmarket.com/" target="_blank" style="color:rgba(255,255,255,0.5);text-decoration:none">oxzmarket.com</a> · All rights reserved · Trading involves risk.</div>
+</footer>
+
+</div><!-- end landing -->
+
+<!-- ═══════════ LOADING OVERLAY ═══════════ -->
+<div class="loading-overlay" id="loadOverlay">
+  <div class="spinner"></div>
+  <div class="loading-txt">Connecting to Stripe...</div>
+  <div class="loading-sub">Please wait, do not close this page</div>
+</div>
+
+<!-- ═══════════ PAYMENT PAGE ═══════════ -->
+<div id="pp">
+  <div class="pnav">
+    <button class="pbk" onclick="closeP()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Home
+    </button>
+    <a class="lbox" href="https://oxzmarket.com/" target="_blank" style="font-size:16px;padding:4px 10px;text-decoration:none">OXZ</a>
+    <div style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      256-bit SSL
+    </div>
+  </div>
+
+  <div class="pbody">
+    <div class="pwrap">
+
+      <div class="ptitl">Deposit Funds</div>
+      <div class="psub">Add funds securely to your <a href="https://oxzmarket.com/" target="_blank" style="color:var(--blue);font-weight:600">OXZ Markets</a> account via Stripe</div>
+
+      <!-- Error box -->
+      <div class="errbox" id="errbox">⚠️ <span id="errtxt">Something went wrong. Please try again.</span></div>
+
+      <!-- Step 1: Account Details -->
+      <div class="pcard">
+        <div class="pctit">1. Your Account Details</div>
+        <div class="fld">
+          <label>Email Address</label>
+          <input type="email" id="uemail" placeholder="your@email.com"/>
+        </div>
+        <div class="fld">
+          <label>OXZ Account ID (optional)</label>
+          <input type="text" id="uaccid" placeholder="Your OXZ Markets account ID or username"/>
+        </div>
+      </div>
+
+      <!-- Step 2: Amount -->
+      <div class="pcard">
+        <div class="pctit">2. Enter Deposit Amount</div>
+        <!-- Quick chips -->
+        <div class="chips">
+          <button class="chip" onclick="setAmt(50,this)">$50</button>
+          <button class="chip" onclick="setAmt(100,this)">$100</button>
+          <button class="chip" onclick="setAmt(250,this)">$250</button>
+          <button class="chip" onclick="setAmt(500,this)">$500</button>
+          <button class="chip" onclick="setAmt(1000,this)">$1,000</button>
+        </div>
+        <div class="fld">
+          <label>Custom Amount (USD)</label>
+          <div class="pfx">
+            <span class="pfxs">$</span>
+            <input type="number" id="damt" placeholder="Or enter custom amount" min="10" oninput="uSum();clearChips()"/>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:-6px">Minimum deposit: $10</div>
+      </div>
+
+      <!-- Step 3: Payment Method -->
+      <div class="pcard">
+        <div class="pctit">3. Payment Method</div>
+        <div class="stripe-banner">
+          <div class="stripe-logo">stripe</div>
+          <div class="stripe-txt"><strong>Secure Stripe Checkout</strong><br>You'll be redirected to Stripe's encrypted payment page to complete your deposit safely.</div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="sumbox">
+        <div class="srow"><span>Deposit Amount</span><span class="sval" id="sa">—</span></div>
+        <div class="srow"><span>Processing Fee</span><span class="sval" style="color:var(--green)">FREE</span></div>
+        <div class="srow tot"><span>Total to Pay</span><span class="sval" id="st">—</span></div>
+      </div>
+
+      <button class="bsub" id="sbtn" onclick="doCheckout()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Proceed to Stripe Checkout
+      </button>
+      <div class="secnote">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Powered by Stripe · 256-bit SSL · <a href="https://oxzmarket.com/" target="_blank" style="color:var(--blue)">oxzmarket.com</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const API_URL = 'https://forexpayment-production.up.railway.app/api/payments/create-intent';
+
+function openP(){
+  document.getElementById('pp').classList.add('on');
+  document.body.style.overflow='hidden';
+  hideErr();
+}
+
+function closeP(){
+  document.getElementById('pp').classList.remove('on');
+  document.body.style.overflow='';
+  document.getElementById('damt').value='';
+  document.getElementById('uemail').value='';
+  document.getElementById('uaccid').value='';
+  uSum();
+  clearChips();
+  hideErr();
+  const b=document.getElementById('sbtn');
+  b.disabled=false;
+  b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
+}
+
+function setAmt(v, el){
+  document.getElementById('damt').value = v;
+  clearChips();
+  el.classList.add('on');
+  uSum();
+}
+
+function clearChips(){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+}
+
+function uSum(){
+  const v=parseFloat(document.getElementById('damt').value);
+  if(isNaN(v)||v<=0){
+    document.getElementById('sa').textContent='—';
+    document.getElementById('st').textContent='—';
+    document.getElementById('sbtn').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
+    return;
+  }
+  const f='$'+v.toFixed(2);
+  document.getElementById('sa').textContent=f;
+  document.getElementById('st').textContent=f;
+  document.getElementById('sbtn').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay '+f+' via Stripe →';
+}
+
+function showErr(msg){
+  document.getElementById('errtxt').textContent=msg;
+  document.getElementById('errbox').classList.add('show');
+  document.getElementById('errbox').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function hideErr(){
+  document.getElementById('errbox').classList.remove('show');
+}
+
+function showLoading(){document.getElementById('loadOverlay').classList.add('show');}
+function hideLoading(){document.getElementById('loadOverlay').classList.remove('show');}
+
+async function doCheckout(){
+  hideErr();
+
+  const email = document.getElementById('uemail').value.trim();
+  const rawAmt = parseFloat(document.getElementById('damt').value);
+
+  // Validation
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    showErr('Please enter a valid email address.');
+    document.getElementById('uemail').focus();
+    return;
+  }
+  if(isNaN(rawAmt) || rawAmt < 10){
+    showErr('Please enter a valid deposit amount (minimum $10).');
+    document.getElementById('damt').focus();
+    return;
+  }
+
+  // Amount in cents for Stripe
+  const amountCents = Math.round(rawAmt * 100);
+
+  const btn = document.getElementById('sbtn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite"><path d="M12 2a10 10 0 0 1 10 10"/></svg> Connecting to Stripe...';
+
+  showLoading();
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: email,
+        amount: amountCents,
+        currency: 'usd',
+        useCheckout: true
+      })
+    });
+
+    if(!res.ok){
+      let errMsg = 'Payment gateway error. Please try again.';
+      try{
+        const errData = await res.json();
+        if(errData.message) errMsg = errData.message;
+        else if(errData.error) errMsg = errData.error;
+      }catch(e){}
+      throw new Error(errMsg);
+    }
+
+    const data = await res.json();
+
+    if(!data.checkoutUrl){
+      throw new Error('No checkout URL received. Please try again.');
+    }
+
+    // Redirect to Stripe Checkout
+    window.location.href = data.checkoutUrl;
+
+  } catch(err){
+    hideLoading();
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Stripe Checkout';
+    showErr(err.message || 'Something went wrong. Please try again.');
+  }
+}
+
+// Close payment page on Escape key
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && document.getElementById('pp').classList.contains('on')){
+    closeP();
+  }
+});
+</script>
+</body>
+</html>
